@@ -1,0 +1,225 @@
+/* CSV Response Importer — App styles */
+.app.csv-importer {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.screen-header {
+  margin-bottom: 1.5rem;
+}
+.screen-header h1 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.5rem;
+}
+.screen-header .subtitle {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+.back {
+  margin-bottom: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+}
+.btn:hover:not(:disabled) {
+  background: #eee;
+}
+.btn-primary {
+  background: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+.btn-primary:hover:not(:disabled) {
+  background: #0b5ed7;
+}
+.btn-secondary {
+  background: #fff;
+}
+.btn-link {
+  background: transparent;
+  border: none;
+  color: #0d6efd;
+  text-decoration: underline;
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.alert-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+.alert button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+}
+
+.recent-imports h2,
+.import-details h2,
+.error-log h2 {
+  font-size: 1.1rem;
+  margin: 1rem 0 0.5rem 0;
+}
+.run-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.run-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+.run-id {
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+.run-status {
+  text-transform: capitalize;
+}
+.empty, .hint {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.stepper {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+.stepper .step {
+  color: #999;
+}
+.stepper .step.active {
+  color: #0d6efd;
+  font-weight: 600;
+}
+.stepper .step.done {
+  color: #198754;
+}
+
+.step-content {
+  margin: 1.5rem 0;
+  min-height: 120px;
+}
+.step-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+.form-group select,
+.form-group input[type="text"] {
+  padding: 0.4rem 0.6rem;
+  min-width: 200px;
+}
+
+.survey-selection select,
+.import-config select {
+  min-width: 240px;
+}
+
+.mapping-table, .runs-table, .error-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+.mapping-table th,
+.mapping-table td,
+.runs-table th,
+.runs-table td,
+.error-table th,
+.error-table td {
+  padding: 0.5rem;
+  text-align: left;
+  border: 1px solid #dee2e6;
+}
+.mapping-table select {
+  min-width: 180px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+.status-badge.completed { background: #d1e7dd; color: #0f5132; }
+.status-badge.processing { background: #cff4fc; color: #055160; }
+.status-badge.failed { background: #f8d7da; color: #721c24; }
+
+.status-card, .details-card {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+.status-card p,
+.details-card p {
+  margin: 0.25rem 0;
+}
+
+.validation-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 6px;
+}
+.validation-result.valid {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+.validation-result.invalid {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.import-id {
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.error-log {
+  margin-top: 1.5rem;
+}

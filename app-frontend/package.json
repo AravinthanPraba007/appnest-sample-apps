@@ -1,0 +1,16 @@
+{
+  "name": "app-frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@sparrowengg/twigs-react": "^0.36.1",
+    "@sparrowengg/twigs-react-icons": "^0.4.1"
+  }
+}

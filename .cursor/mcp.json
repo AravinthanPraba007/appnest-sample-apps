@@ -1,0 +1,21 @@
+{
+    "mcpServers": {
+        "appnest-ai-mcp": {
+            "command": "node",
+            "args": [
+                "/Users/aravinthanp/Desktop/Appnest/New Appnest Ecosystem/appnest-ai-mcp/build/server.js"
+            ],
+            "cwd": "/Users/aravinthanp/Desktop/Appnest/New Appnest Ecosystem/appnest-ai-mcp/build/",
+            "transport": "stdio",
+            "allowedExecutables": [
+                "git",
+                "ssdk",
+                "node",
+                "cd",
+                "echo",
+                "npm",
+                "mkdir"
+            ]
+        }
+    }
+}

@@ -1,0 +1,45 @@
+{
+  "platform_version": "2.0",
+  "parent_product": "surveysparrow",
+  "frontend_locations": {
+    "full_page_app": {
+      "url": "index.html"
+    }
+  },
+  "whitelisted_domains": [
+    "https://api\\.surveysparrow\\.com(/.*)?"
+  ],
+  "event_listener_functions": {},
+  "backend_api_functions": {
+    "getSurveys": { "timeout": 15 },
+    "getSurveyQuestions": { "timeout": 15 },
+    "getCsvUploadUrl": { "timeout": 10 },
+    "validateCsv": { "timeout": 30 },
+    "saveColumnMapping": { "timeout": 10 },
+    "startImport": { "timeout": 20 },
+    "processImportChunk": { "timeout": 120 },
+    "getImportStatus": { "timeout": 10 },
+    "getImportHistory": { "timeout": 15 },
+    "getImportDetails": { "timeout": 10 },
+    "getErrorRowsDownloadUrl": { "timeout": 10 },
+    "retryFailedImports": { "timeout": 120 }
+  },
+  "custom_installation_frontend": false,
+  "installation_params": {
+    "surveysparrow_api_key": {
+      "display_name": "SurveySparrow API Key",
+      "description": "Enter your SurveySparrow API key. You can find it in Settings → Apps & Integrations.",
+      "type": "api_key",
+      "required": true,
+      "secure": true
+    },
+    "survey_api_base_url": {
+      "display_name": "Survey API Base URL",
+      "description": "SurveySparrow API base URL (e.g. https://api.surveysparrow.com). Use region-specific URL if needed (EU, AP, etc.).",
+      "type": "text",
+      "required": false,
+      "secure": false,
+      "default_value": "https://api.surveysparrow.com"
+    }
+  }
+}
