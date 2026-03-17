@@ -1,0 +1,42 @@
+{
+  "platform_version": "2.0",
+  "parent_product": "surveysparrow",
+  "product_config": {
+    "surveysparrow": {
+      "frontend_locations": {
+        "full_page_app": {
+          "url": "index.html"
+        }
+      },
+      "whitelisted_domains": [
+        "https://(.*)\\.surveysparrow\\.com(.*)",
+        "https://api\\.surveysparrow\\.com(/.*)?"
+      ],
+      "event_listener_functions": {},
+      "backend_api_functions": {
+        "getSurveys": { "timeout": 10 },
+        "getSurveyResponses": { "timeout": 10 },
+        "syncSurveys": { "timeout": 15 },
+        "createBackupCsv": { "timeout": 60 },
+        "listBackups": { "timeout": 10 },
+        "getBackupDownloadUrl": { "timeout": 10 }
+      },
+      "installation_parameters": {
+        "surveysparrow_api_key": {
+          "display_name": "SurveySparrow API Key",
+          "description": "API key for SurveySparrow Public API. Used only in backend.",
+          "type": "api_key",
+          "required": true,
+          "secure": true
+        },
+        "survey_sparrow_base_url": {
+          "display_name": "SurveySparrow API Base URL",
+          "description": "Optional. e.g. https://api.surveysparrow.com or your regional endpoint.",
+          "type": "text",
+          "required": false,
+          "default_value": "https://api.surveysparrow.com"
+        }
+      }
+    }
+  }
+}

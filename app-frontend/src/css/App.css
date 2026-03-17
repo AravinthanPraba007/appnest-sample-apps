@@ -1,0 +1,191 @@
+/* ==========================================================================
+   SurveySparrow Response Viewer — App styles
+   Use these variables and classes for consistent layout and theming.
+   ========================================================================== */
+
+:root {
+  /* Spacing scale (align with Twigs where possible) */
+  --app-space-xs: 0.25rem;
+  --app-space-sm: 0.5rem;
+  --app-space-md: 1rem;
+  --app-space-lg: 1.5rem;
+  --app-space-xl: 2rem;
+  --app-space-2xl: 2.5rem;
+
+  /* Layout */
+  --app-container-max-width: 56rem;
+  --app-container-padding: 1.5rem;
+  --app-section-gap: 1.5rem;
+
+  /* Colors — light default (embedded host may override via .app-root) */
+  --app-text: #191717;
+  --app-text-muted: #57606a;
+  --app-bg: #ffffff;
+  --app-border: #e5e7eb;
+  --app-error-bg: #fee2e2;
+  --app-error-text: #b91c1c;
+  --app-card-bg: #ffffff;
+  --app-card-border: #e5e7eb;
+  --app-radius: 0.375rem;
+}
+
+/* When embedded in a dark host, uncomment or use to force light content area */
+.app-root {
+  color: var(--app-text);
+  background-color: var(--app-bg);
+  min-height: 100%;
+}
+
+/* App shell: full-width wrapper, no side padding (navbar is full-width; container has padding) */
+.app-shell {
+  box-sizing: border-box;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top navbar */
+.app-navbar {
+  flex-shrink: 0;
+  background-color: var(--app-bg);
+  border-bottom: 1px solid var(--app-border);
+  padding: var(--app-space-md) var(--app-container-padding);
+}
+
+.app-navbar__inner {
+  max-width: var(--app-container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-space-md);
+  flex-wrap: wrap;
+}
+
+.app-navbar__left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--app-space-md);
+}
+
+.app-navbar__home {
+  background: none;
+  border: none;
+  padding: var(--app-space-xs) 0;
+  cursor: pointer;
+  color: var(--app-text);
+  font: inherit;
+  text-align: left;
+}
+
+.app-navbar__home:hover {
+  color: var(--app-text-muted);
+}
+
+.app-navbar__right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--app-space-sm);
+}
+
+.app-navbar__link--active {
+  opacity: 0.8;
+}
+
+/* Layout: navbar + main */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.app-layout__main {
+  flex: 1;
+  padding: var(--app-container-padding);
+  box-sizing: border-box;
+}
+
+/* Main content container: max-width + centered for readability */
+.app-container {
+  max-width: var(--app-container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-section-gap);
+}
+
+/* Page section (optional): use for grouping blocks with consistent gap */
+.app-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-lg);
+}
+
+/* Card-style block (surveys, responses, backups list items) */
+.app-card {
+  padding: var(--app-space-lg);
+  border: 1px solid var(--app-card-border);
+  border-radius: var(--app-radius);
+  background-color: var(--app-card-bg);
+}
+
+/* Error message block */
+.app-error {
+  padding: var(--app-space-md);
+  border-radius: var(--app-radius);
+  background-color: var(--app-error-bg);
+  color: var(--app-error-text);
+}
+
+/* Header row: title + actions on one line, wraps on small screens */
+.app-header-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-space-md);
+}
+
+/* Button group (e.g. Sync + View backups) */
+.app-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--app-space-md);
+}
+
+/* Muted helper text below a heading */
+.app-subtitle {
+  color: var(--app-text-muted);
+  font-size: 0.875rem;
+  margin-top: var(--app-space-xs);
+}
+
+/* Empty state message */
+.app-empty {
+  padding: var(--app-space-xl);
+  color: var(--app-text-muted);
+  text-align: center;
+}
+
+/* Responsive: reduce padding on small viewports */
+@media (max-width: 640px) {
+  .app-navbar {
+    padding: var(--app-space-md);
+  }
+
+  .app-layout__main {
+    padding: var(--app-space-md);
+  }
+
+  .app-container {
+    gap: var(--app-space-md);
+  }
+}
