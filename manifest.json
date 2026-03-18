@@ -1,0 +1,35 @@
+{
+  "platform_version": "2.0",
+  "parent_product": "surveysparrow",
+  "product_config": {
+    "surveysparrow": {
+      "frontend_locations": {
+        "full_page_app": {
+          "url": "index.html"
+        }
+      },
+      "whitelisted_domains": [
+        "https://api\\.surveysparrow\\.com(/.*)?"
+      ],
+      "event_listener_functions": {},
+      "backend_api_functions": {
+        "getSurveys": { "timeout": 10 },
+        "syncSurveys": { "timeout": 30 },
+        "getResponses": { "timeout": 15 },
+        "listBackups": { "timeout": 10 },
+        "getBackupDownloadUrl": { "timeout": 10 },
+        "runScheduledBackup": { "timeout": 60 }
+      },
+      "installation_parameters": {
+        "surveysparrow_api_key": {
+          "data-bind": "product.api_key",
+          "display_name": "SurveySparrow API Key",
+          "description": "Please enter your SurveySparrow API key. You can find it in Settings -> Apps & Integrations.",
+          "required": true,
+          "secure": true,
+          "type": "api_key"
+        }
+      }
+    }
+  }
+}
