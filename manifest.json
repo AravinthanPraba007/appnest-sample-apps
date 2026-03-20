@@ -43,43 +43,6 @@
           "secure": true,
           "type": "api_key"
         },
-        "client_id": {
-          "display_name": "Client ID",
-          "description": "Please enter your Client ID here",
-          "type": "text",
-          "required": true
-        },
-        "client_secret": {
-          "display_name": "Client Secret",
-          "description": "Please enter your Client Secret here",
-          "type": "text",
-          "required": true
-        },
-        "authorize_url": {
-          "display_name": "Authorize URL",
-          "description": "Please enter your Authorize URL here",
-          "type": "text",
-          "required": true
-        },
-        "token_url": {
-          "display_name": "Token URL",
-          "description": "Please enter your Token URL here",
-          "type": "text",
-          "required": true
-        },
-        "account_identifier": {
-          "display_name": "Account Identifier",
-          "description": "Please enter your Account Identifier here",
-          "type": "text",
-          "required": true
-        },
-        "account_type": {
-          "display_name": "Choose Setup Method",
-          "description": " How would you like to connect to Snowflake?",
-          "type": "text",
-          "required": true,
-          "default_value": "data_sharing"
-        },
         "survey_api_base_url": {
           "display_name": "SurveySparrow API Base URL",
           "description": "Optional. e.g. https://api.surveysparrow.com or your regional endpoint.",
