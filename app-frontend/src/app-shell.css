@@ -1,0 +1,762 @@
+/* Base shell */
+#root {
+  min-height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Capability Lab — plain CSS fallbacks when Twigs/Stitches rules are blocked  */
+/* or lost in the host (shadow DOM, CSP, reset CSS). Scoped under #root.     */
+/* -------------------------------------------------------------------------- */
+
+#root #capability-lab-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+#root #capability-lab-topnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, #d6eef0 0%, #e8e6fe 45%, #ffffff 100%);
+  border-bottom: 1px solid #cbd5e1;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+#root #capability-lab-topnav .lab-topnav-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#root #capability-lab-topnav .lab-topnav-title-block h1,
+#root #capability-lab-topnav .lab-topnav-title-block h2,
+#root #capability-lab-topnav .lab-topnav-title-block h3,
+#root #capability-lab-topnav .lab-topnav-title-block h4,
+#root #capability-lab-topnav .lab-topnav-title-block h5,
+#root #capability-lab-topnav .lab-topnav-title-block h6 {
+  color: #0f172a;
+  margin: 0;
+  font-weight: 700;
+}
+
+#root #capability-lab-topnav .lab-subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+#root #capability-lab-topnav .lab-topnav-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#root #capability-lab-topnav .lab-toolbar-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #94a3b8;
+  background: #ffffff;
+  color: #334155;
+}
+
+#root #capability-lab-topnav .lab-toolbar-btn:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #64748b;
+}
+
+#root #capability-lab-topnav .lab-toolbar-btn-primary {
+  background: linear-gradient(135deg, #2e666d 0%, #00828d 100%);
+  color: #ffffff;
+  border-color: #1d5156;
+}
+
+#root #capability-lab-topnav .lab-toolbar-btn-primary:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+#root #capability-lab-topnav button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Body: sidebar + main */
+#root #capability-lab-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+@media (min-width: 900px) {
+  #root #capability-lab-body {
+    flex-direction: row;
+  }
+}
+
+/* Sidebar */
+#root #capability-lab-sidebar {
+  width: 100%;
+  padding: 1rem 1rem 1.25rem;
+  background: #e2e8f0;
+  border-bottom: 1px solid #cbd5e1;
+}
+
+@media (min-width: 900px) {
+  #root #capability-lab-sidebar {
+    width: 288px;
+    flex-shrink: 0;
+    border-bottom: none;
+    border-right: 1px solid #cbd5e1;
+    min-height: calc(100vh - 88px);
+  }
+}
+
+#root #capability-lab-sidebar .lab-sidebar-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #475569;
+  margin: 0 0 0.75rem;
+}
+
+#root #capability-lab-sidebar .lab-nav-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#root #capability-lab-sidebar button.lab-sdk-nav-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 1rem;
+  border-radius: 0.65rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+  min-height: unset;
+  height: auto;
+}
+
+#root #capability-lab-sidebar button.lab-sdk-nav-btn:hover:not(.is-active) {
+  border-color: #00828d;
+  background: #f8fafc;
+}
+
+#root #capability-lab-sidebar button.lab-sdk-nav-btn.is-active {
+  background: linear-gradient(135deg, #2e666d 0%, #00828d 100%);
+  color: #ffffff;
+  border-color: #1d5156;
+  box-shadow: 0 6px 16px rgba(46, 102, 109, 0.35);
+}
+
+/* Keep teal when active; Twigs ghost/solid hover otherwise wins and flashes white */
+#root #capability-lab-sidebar button.lab-sdk-nav-btn.is-active:hover {
+  background: linear-gradient(135deg, #2e666d 0%, #00828d 100%);
+  color: #ffffff;
+  border-color: #1d5156;
+  filter: brightness(1.05);
+}
+
+#root #capability-lab-sidebar button.lab-sdk-nav-btn p,
+#root #capability-lab-sidebar button.lab-sdk-nav-btn span {
+  color: inherit;
+}
+
+#root #capability-lab-sidebar button.lab-sdk-nav-btn .lab-nav-title {
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9375rem;
+}
+
+/* Main column */
+#root #capability-lab-main {
+  flex: 1;
+  min-width: 0;
+  padding: 1.25rem 1.25rem 2rem;
+  background: #ffffff;
+}
+
+@media (min-width: 900px) {
+  #root #capability-lab-main {
+    padding: 2rem 2.25rem 2.5rem;
+  }
+}
+
+#root #capability-lab-main .lab-main-header h1,
+#root #capability-lab-main .lab-main-header h2,
+#root #capability-lab-main .lab-main-header h3,
+#root #capability-lab-main .lab-main-header h4,
+#root #capability-lab-main .lab-main-header h5,
+#root #capability-lab-main .lab-main-header h6 {
+  color: #0f4c54;
+  margin: 0;
+}
+
+#root #capability-lab-main .lab-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: #ddd6fe;
+  color: #5b21b6;
+}
+
+#root #capability-lab-main .lab-blurb {
+  margin: 0.5rem 0 0;
+  color: #475569;
+  font-size: 0.9375rem;
+  max-width: 44rem;
+}
+
+#root #capability-lab-main .lab-main-card {
+  margin-top: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+#root #capability-lab-main .lab-main-card p {
+  margin: 0 0 0.75rem;
+  color: #334155;
+}
+
+#root #capability-lab-main .lab-field-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #334155;
+  margin: 0 0 0.35rem;
+}
+
+#root #capability-lab-main input[type='text'],
+#root #capability-lab-main input[type='number'],
+#root #capability-lab-main textarea {
+  width: 100%;
+  max-width: 28rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  background: #fff;
+  color: #0f172a;
+}
+
+#root #capability-lab-main textarea {
+  max-width: 36rem;
+  min-height: 6rem;
+  font-family: ui-monospace, monospace;
+}
+
+/* $fetch request builder — wide form; selectors work with or without #root */
+#root #capability-lab-main .lab-fetch-form,
+.capability-lab-app #capability-lab-main .lab-fetch-form,
+#capability-lab-main .lab-fetch-form {
+  width: 100%;
+  max-width: min(100%, 60rem);
+  box-sizing: border-box;
+}
+
+#root #capability-lab-main .lab-fetch-form .lab-fetch-row,
+.capability-lab-app #capability-lab-main .lab-fetch-form .lab-fetch-row,
+#capability-lab-main .lab-fetch-form .lab-fetch-row {
+  margin-bottom: 1rem;
+}
+
+#root #capability-lab-main .lab-fetch-form .lab-fetch-row:last-of-type,
+.capability-lab-app #capability-lab-main .lab-fetch-form .lab-fetch-row:last-of-type,
+#capability-lab-main .lab-fetch-form .lab-fetch-row:last-of-type {
+  margin-bottom: 0;
+}
+
+#root #capability-lab-main .lab-fetch-method-select,
+.capability-lab-app #capability-lab-main .lab-fetch-method-select,
+#capability-lab-main .lab-fetch-method-select {
+  min-width: 8.5rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background: #fff;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+#root #capability-lab-main .lab-schedule-unit-select,
+.capability-lab-app #capability-lab-main .lab-schedule-unit-select,
+#capability-lab-main .lab-schedule-unit-select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  background: #fff;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+/* Override global 28rem input / 36rem textarea caps inside $fetch form */
+#root #capability-lab-main .lab-fetch-form input,
+.capability-lab-app #capability-lab-main .lab-fetch-form input,
+#capability-lab-main .lab-fetch-form input {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+#root #capability-lab-main textarea.lab-fetch-json-textarea,
+.capability-lab-app #capability-lab-main textarea.lab-fetch-json-textarea,
+#capability-lab-main textarea.lab-fetch-json-textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  min-height: 5rem;
+}
+
+/* $schedule onScheduledEvent — scrollable list + JSON block */
+#root #capability-lab-main .lab-trigger-history-list,
+.capability-lab-app #capability-lab-main .lab-trigger-history-list,
+#capability-lab-main .lab-trigger-history-list {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #f1f5f9;
+}
+
+#root #capability-lab-main .lab-trigger-history-list::-webkit-scrollbar,
+.capability-lab-app #capability-lab-main .lab-trigger-history-list::-webkit-scrollbar,
+#capability-lab-main .lab-trigger-history-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+#root #capability-lab-main .lab-trigger-history-list::-webkit-scrollbar-thumb,
+.capability-lab-app #capability-lab-main .lab-trigger-history-list::-webkit-scrollbar-thumb,
+#capability-lab-main .lab-trigger-history-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+#root #capability-lab-main .lab-trigger-payload-pre,
+.capability-lab-app #capability-lab-main .lab-trigger-payload-pre,
+#capability-lab-main .lab-trigger-payload-pre {
+  scrollbar-width: thin;
+  scrollbar-color: #64748b #1e293b;
+}
+
+#root #capability-lab-main .lab-trigger-payload-pre::-webkit-scrollbar,
+.capability-lab-app #capability-lab-main .lab-trigger-payload-pre::-webkit-scrollbar,
+#capability-lab-main .lab-trigger-payload-pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+#root #capability-lab-main .lab-trigger-payload-pre::-webkit-scrollbar-thumb,
+.capability-lab-app #capability-lab-main .lab-trigger-payload-pre::-webkit-scrollbar-thumb,
+#capability-lab-main .lab-trigger-payload-pre::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+/* Action grid buttons */
+#root .lab-action-grid {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 520px) {
+  #root .lab-action-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  #root #capability-lab-main .lab-action-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Panel actions: grid cells and standalone row buttons */
+#root #capability-lab-main .lab-main-card button {
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #334155;
+  cursor: pointer;
+  min-height: 2.75rem;
+}
+
+#root #capability-lab-main .lab-main-card button:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+#root #capability-lab-main .lab-main-card button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#root #capability-lab-main .lab-logs-header .lab-toolbar-btn {
+  min-height: unset;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8125rem;
+}
+
+/* $db / $schedule type tabs (shared) */
+#root #capability-lab-main .lab-db-tablist,
+.capability-lab-app #capability-lab-main .lab-db-tablist,
+#capability-lab-main .lab-db-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+#root #capability-lab-main .lab-db-tablist button.lab-db-tab,
+.capability-lab-app #capability-lab-main .lab-db-tablist button.lab-db-tab,
+#capability-lab-main .lab-db-tablist button.lab-db-tab {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+#root #capability-lab-main .lab-db-tablist button.lab-db-tab.is-selected,
+.capability-lab-app #capability-lab-main .lab-db-tablist button.lab-db-tab.is-selected,
+#capability-lab-main .lab-db-tablist button.lab-db-tab.is-selected {
+  background: linear-gradient(135deg, #2e666d 0%, #00828d 100%);
+  color: #ffffff;
+  border-color: #1d5156;
+}
+
+/* $schedule type tabs — larger, bolder, more spacing than $db tabs */
+#root #capability-lab-main .lab-schedule-tablist,
+.capability-lab-app #capability-lab-main .lab-schedule-tablist,
+#capability-lab-main .lab-schedule-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+}
+
+#root #capability-lab-main .lab-schedule-tablist button.lab-schedule-tab,
+.capability-lab-app #capability-lab-main .lab-schedule-tablist button.lab-schedule-tab,
+#capability-lab-main .lab-schedule-tablist button.lab-schedule-tab {
+  min-height: 2.65rem;
+  padding: 0.5rem 1.15rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+#root #capability-lab-main .lab-schedule-tablist button.lab-schedule-tab.is-selected,
+.capability-lab-app #capability-lab-main .lab-schedule-tablist button.lab-schedule-tab.is-selected,
+#capability-lab-main .lab-schedule-tablist button.lab-schedule-tab.is-selected {
+  background: linear-gradient(135deg, #2e666d 0%, #00828d 100%);
+  color: #ffffff;
+  border-color: #1d5156;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+#root #capability-lab-main .lab-db-tabpanel,
+.capability-lab-app #capability-lab-main .lab-db-tabpanel,
+#capability-lab-main .lab-db-tabpanel {
+  min-height: 4rem;
+}
+
+/* $db / $schedule action rows: heading + input + CTA */
+#root #capability-lab-main .lab-db-action-row,
+.capability-lab-app #capability-lab-main .lab-db-action-row,
+#capability-lab-main .lab-db-action-row {
+  padding: 1rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+#root #capability-lab-main .lab-db-action-row:last-child,
+.capability-lab-app #capability-lab-main .lab-db-action-row:last-child,
+#capability-lab-main .lab-db-action-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+#root #capability-lab-main .lab-db-action-list,
+.capability-lab-app #capability-lab-main .lab-db-action-list,
+#capability-lab-main .lab-db-action-list {
+  display: flex;
+  flex-direction: column;
+}
+
+#root #capability-lab-main textarea.lab-map-json-textarea {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  background: #fff;
+  color: #0f172a;
+}
+
+/* Last action result — selectors without #root: Appnest full-page shell often has no #root */
+#root #capability-lab-main .lab-action-outcome,
+.capability-lab-app #capability-lab-main .lab-action-outcome,
+#capability-lab-main .lab-action-outcome {
+  margin-top: 0.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Plain div scroll viewport (not Twigs Box) — inner pre width:max-content drives horizontal scroll */
+#root #capability-lab-main .lab-action-outcome-scroll-host,
+.capability-lab-app #capability-lab-main .lab-action-outcome-scroll-host,
+#capability-lab-main .lab-action-outcome-scroll-host {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: 20rem;
+  max-height: min(20rem, 52vh);
+  /* scroll: always show gutters where supported (easier to discover than overlay-only) */
+  overflow: scroll;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #f8fafc;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #e2e8f0;
+  position: relative;
+  contain: content;
+}
+
+#root #capability-lab-main .lab-action-outcome-scroll-host::-webkit-scrollbar,
+.capability-lab-app #capability-lab-main .lab-action-outcome-scroll-host::-webkit-scrollbar,
+#capability-lab-main .lab-action-outcome-scroll-host::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+#root #capability-lab-main .lab-action-outcome-scroll-host::-webkit-scrollbar-thumb,
+.capability-lab-app #capability-lab-main .lab-action-outcome-scroll-host::-webkit-scrollbar-thumb,
+#capability-lab-main .lab-action-outcome-scroll-host::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 6px;
+  border: 2px solid #f8fafc;
+}
+
+#root #capability-lab-main .lab-action-outcome-scroll-host::-webkit-scrollbar-track,
+.capability-lab-app #capability-lab-main .lab-action-outcome-scroll-host::-webkit-scrollbar-track,
+#capability-lab-main .lab-action-outcome-scroll-host::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 6px;
+}
+
+#root #capability-lab-main .lab-action-outcome-body,
+.capability-lab-app #capability-lab-main .lab-action-outcome-body,
+#capability-lab-main .lab-action-outcome-body {
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  color: #0f172a;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  white-space: pre;
+  overflow: visible;
+  width: max-content;
+  min-width: 100%;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* Logs */
+#root #capability-lab-main .lab-logs-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+#root #capability-lab-main .lab-logs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+#root #capability-lab-main .lab-logs-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  border-radius: 0.75rem;
+  background: #f1f5f9;
+  border: 1px dashed #cbd5e1;
+  color: #64748b;
+}
+
+#root #capability-lab-main table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+#root #capability-lab-main th,
+#root #capability-lab-main td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0.65rem 0.5rem;
+  text-align: left;
+}
+
+#root #capability-lab-main thead th {
+  background: #f8fafc;
+  font-weight: 700;
+  color: #334155;
+}
+
+#root #capability-lab-main tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Capability Lab — Twigs/Radix dialogs are portaled to document.body. Rules  */
+/* must not be scoped under #root. z-index sits above host chrome & lab nav.   */
+/* -------------------------------------------------------------------------- */
+
+.twigs-dialog__overlay.lab-cap-dialog-overlay {
+  z-index: 100050 !important;
+  background-color: rgba(15, 23, 42, 0.58) !important;
+}
+
+[role='dialog'].lab-cap-dialog-content {
+  z-index: 100051 !important;
+  box-sizing: border-box;
+  width: min(28rem, calc(100vw - 2rem)) !important;
+  max-width: min(28rem, calc(100vw - 2rem)) !important;
+  padding: 1.25rem 1.5rem 1.5rem !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif !important;
+  line-height: 1.5 !important;
+  color: #0f172a !important;
+  /* Opaque surface: Twigs/Stitches panel bg often missing when embedded */
+  background-color: #ffffff !important;
+  background-image: none !important;
+  box-shadow:
+    0 25px 50px -12px rgba(15, 23, 42, 0.28),
+    0 0 0 1px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+[role='dialog'].lab-cap-dialog-content * {
+  font-family: inherit !important;
+}
+
+[role='dialog'].lab-cap-dialog-content h2 {
+  margin: 0 0 0.5rem !important;
+  font-size: 1.125rem !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  line-height: 1.35 !important;
+}
+
+[role='dialog'].lab-cap-dialog-content p {
+  margin: 0 0 1.25rem !important;
+  font-size: 0.875rem !important;
+  color: #475569 !important;
+  line-height: 1.5 !important;
+}
+
+[role='dialog'].lab-cap-dialog-content footer {
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+[role='dialog'].lab-cap-dialog-content footer > * {
+  width: 100%;
+  display: flex !important;
+  justify-content: flex-end !important;
+  flex-wrap: wrap !important;
+  gap: 0.75rem !important;
+}
+
+/* Twigs buttons default to transparent; host may not load variant styles on body */
+[role='dialog'].lab-cap-dialog-content button {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  cursor: pointer;
+  border: 1px solid #94a3b8;
+  background-color: #ffffff !important;
+  color: #334155 !important;
+  min-height: 2.5rem;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+[role='dialog'].lab-cap-dialog-content button:hover:not(:disabled) {
+  background-color: #f8fafc !important;
+  border-color: #64748b;
+}
+
+[role='dialog'].lab-cap-dialog-content button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[role='dialog'].lab-cap-dialog-content footer button:last-of-type:not(:only-of-type) {
+  border-color: #2563eb !important;
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+[role='dialog'].lab-cap-dialog-content footer button:last-of-type:not(:only-of-type):hover:not(:disabled) {
+  background-color: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+}

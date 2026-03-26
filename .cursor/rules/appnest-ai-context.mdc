@@ -1,0 +1,16 @@
+---
+description: Use official Appnest AI context pack for platform work
+alwaysApply: true
+---
+
+# Appnest AI context
+
+This repo includes **`appnest-ai-context/`** (governance, Appnest Functions, manifest rules, Twigs, PRD generator). For Appnest features, backend handlers, `manifest.json`, `$db` / `$fetch` / `$file` / `$next` / `$schedule`, or Twigs UI:
+
+1. Follow the reading order in **`appnest-ai-context/appnest-governance/Documentation-Order.md`**.
+2. For UI: **`appnest-ai-context/appnest-governance/App-Frontend-Rules.md`** and **`Twigs-UI-Reference.md`**.
+3. For PRDs: **`appnest-ai-context/appnest-prd-generator/README.md`** and workflow files there.
+
+Project wiring: backend exports live in **`app-backend/server.js`**; frontend entry **`app-frontend/src/App.jsx`**. Frontend calls the backend via **`window.appnestClientFunctions.appBackend.invoke`** with both `apiFunctionName` and `serverMethod` (see **`app-frontend/src/capability-lab/labApi.js`**). **`manifest.json`** at repo root must list `backend_api_functions` and other platform fields per **Manifest-Rules.md**.
+
+Optional MCP: **`.cursor/mcp.json`** can register `@sparrowengg/appnest-app-mcp` (e.g. `setup_appnest_ai_context` to refresh the pack).

@@ -1,0 +1,12 @@
+{
+    "mcpServers": {
+        "appnest-app-mcp": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@sparrowengg/appnest-app-mcp"
+            ],
+            "transport": "stdio"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+  "platform_version": "2.0",
+  "parent_product": "surveysparrow",
+  "frontend_locations": {
+    "full_page_app": {
+      "url": "index.html"
+    }
+  },
+  "whitelisted_domains": [
+    "https://api\\.salesparrow\\.com(/.*)?"
+  ],
+  "event_listener_functions": {
+    "onScheduledEvent": {
+      "handler": "onScheduledEvent"
+    }
+  },
+  "backend_api_functions": {
+    "getCapabilityLabState": { "timeout": 10 },
+    "runSdkLabAction": { "timeout": 25 },
+    "clearCapabilityLabLogs": { "timeout": 10 },
+    "clearCapabilityLabData": { "timeout": 25 },
+    "chainCapabilityStepOne": { "timeout": 10 },
+    "chainCapabilityStepTwo": { "timeout": 10 },
+    "executeScheduledCapabilityJob": { "timeout": 10 }
+  },
+  "custom_installation_frontend": false,
+  "installation_params": {},
+  "oauth_config": {}
+}
