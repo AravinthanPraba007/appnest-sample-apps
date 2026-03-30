@@ -1,0 +1,49 @@
+{
+  "platform_version": "2.0",
+  "parent_product": "surveysparrow",
+  "frontend_locations": {
+    "full_page_app": {
+      "url": "index.html"
+    }
+  },
+  "whitelisted_domains": [
+    "https://api\\.surveysparrow\\.com(/.*)?"
+  ],
+  "backend_api_functions": {
+    "listSurveys": {
+      "timeout": 15
+    },
+    "getSurveyQuestions": {
+      "timeout": 25
+    },
+    "ingestCsv": {
+      "timeout": 25
+    },
+    "validateMapping": {
+      "timeout": 25
+    },
+    "startImportJob": {
+      "timeout": 20
+    },
+    "processImportBatch": {
+      "timeout": 60
+    },
+    "getImportJobStatus": {
+      "timeout": 15
+    },
+    "cancelImportJob": {
+      "timeout": 10
+    }
+  },
+  "custom_installation_frontend": false,
+  "installation_params": {
+    "surveysparrow_api_key": {
+      "data-bind": "product.api_key",
+      "display_name": "SurveySparrow API key",
+      "description": "Private app access token from Settings → Apps & Integrations. Used to call SurveySparrow API v3.",
+      "required": true,
+      "secure": true,
+      "type": "api_key"
+    }
+  }
+}
