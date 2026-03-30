@@ -1,0 +1,28 @@
+{
+  "platform_version": "2.0",
+  "parent_product": "surveysparrow",
+  "frontend_locations": {
+    "full_page_app": {
+      "url": "index.html"
+    }
+  },
+  "whitelisted_domains": [
+    "https://api\\.surveysparrow\\.com(/.*)?"
+  ],
+  "backend_api_functions": {
+    "listSurveySparrowContacts": {
+      "timeout": 20
+    }
+  },
+  "custom_installation_frontend": false,
+  "installation_params": {
+    "surveysparrow_api_key": {
+      "data-bind": "product.api_key",
+      "display_name": "SurveySparrow API key",
+      "description": "API key from Settings → Apps & Integrations. Used to read contacts from your workspace.",
+      "required": true,
+      "secure": true,
+      "type": "api_key"
+    }
+  }
+}
