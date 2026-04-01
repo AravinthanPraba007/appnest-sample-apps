@@ -19,8 +19,7 @@
     "runSdkLabAction": { "timeout": 25 },
     "clearCapabilityLabLogs": { "timeout": 10 },
     "clearCapabilityLabData": { "timeout": 25 },
-    "chainCapabilityStepOne": { "timeout": 10 },
-    "chainCapabilityStepTwo": { "timeout": 10 },
+    "nextLabLogInvocation": { "timeout": 10 },
     "executeScheduledCapabilityJob": { "timeout": 10 }
   },
   "custom_installation_frontend": false,

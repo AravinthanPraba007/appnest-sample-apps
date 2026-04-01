@@ -47,6 +47,9 @@ const SCHEDULE_TRIGGERS_LIST_KEY = {
   RECURRING: 'capability_lab:schedule_triggers_received_recurring',
 };
 
+/** $db.list — $next.run invocations for nextLabLogInvocation (lab UI history) */
+const NEXT_INVOCATIONS_LIST_KEY = 'capability_lab:next_run_invocations';
+
 function scheduleTriggersListKey(scheduleType) {
   if (scheduleType === 'ONE_TIME') return SCHEDULE_TRIGGERS_LIST_KEY.ONE_TIME;
   if (scheduleType === 'CRON') return SCHEDULE_TRIGGERS_LIST_KEY.CRON;
@@ -127,6 +130,27 @@ async function appendScheduleTriggerRecord(record) {
   const next = [...prev, row];
   const trimmed = next.length > 500 ? next.slice(-500) : next;
   await $db.list.set({ key, value: trimmed });
+}
+
+async function getNextInvocationsList() {
+  try {
+    const raw = await $db.list.get({ key: NEXT_INVOCATIONS_LIST_KEY });
+    return Array.isArray(raw) ? raw : [];
+  } catch {
+    return [];
+  }
+}
+
+async function appendNextInvocationRecord({ invokedAt, payload }) {
+  const prev = await getNextInvocationsList();
+  const row = {
+    id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
+    invokedAt: invokedAt || new Date().toISOString(),
+    payload: payload != null && typeof payload === 'object' ? payload : { value: payload },
+  };
+  const next = [...prev, row];
+  const trimmed = next.length > 500 ? next.slice(-500) : next;
+  await $db.list.set({ key: NEXT_INVOCATIONS_LIST_KEY, value: trimmed });
 }
 const FILE_PATH = 'capability-lab/demo.txt';
 const FILE_LIST_PREFIX = 'capability-lab/';
@@ -1037,11 +1061,32 @@ async function handleScheduleAction(action, payload) {
 }
 
 async function handleNextAction(action, payload) {
-  if (action === 'chainDemo') {
-    await chainCapabilityStepOne({ payload: { source: 'ui' } });
+  if (action === 'listNextInvocations') {
+    const list = await getNextInvocationsList();
+    const invocations = [...list].reverse().slice(0, 150);
     return {
       ok: true,
-      message: 'Step 1 logged; step 2 scheduled with 1s delay via $next.run',
+      invocations,
+      total: list.length,
+      storageKey: NEXT_INVOCATIONS_LIST_KEY,
+    };
+  }
+
+  if (action === 'clearNextInvocations') {
+    const prev = await getNextInvocationsList();
+    const removed = prev.length;
+    await $db.list.set({ key: NEXT_INVOCATIONS_LIST_KEY, value: [] });
+    await appendRun({
+      category: '$next',
+      action,
+      status: 'ok',
+      message: `clearNextInvocations removed ${removed} row(s) (${NEXT_INVOCATIONS_LIST_KEY})`,
+    });
+    return {
+      ok: true,
+      message: `Cleared ${removed} record(s)`,
+      removed,
+      storageKey: NEXT_INVOCATIONS_LIST_KEY,
     };
   }
 
@@ -1097,29 +1142,20 @@ async function handleTraceAction(action, _payload) {
   return { ok: true, message: 'Trace ID read', traceId };
 }
 
-async function chainCapabilityStepOne({ payload = {} } = {}) {
+/**
+ * Invoked via $next.run — records wall-clock time and payload for the lab trigger history UI.
+ */
+async function nextLabLogInvocation({ payload = {} } = {}) {
+  const invokedAt = new Date().toISOString();
+  await appendNextInvocationRecord({ invokedAt, payload });
+  const preview = JSON.stringify(payload).slice(0, 240);
   await appendRun({
     category: '$next',
-    action: 'chainStep1',
+    action: 'nextLabLogInvocation',
     status: 'ok',
-    message: `step 1 (source=${payload.source || 'next'})`,
+    message: `invokedAt=${invokedAt} payload=${preview}${preview.length >= 240 ? '…' : ''}`,
   });
-  await $next.run({
-    functionName: 'chainCapabilityStepTwo',
-    payload: { fromStep: 1 },
-    delay: 1,
-  });
-  return { ok: true, step: 1 };
-}
-
-async function chainCapabilityStepTwo({ payload = {} } = {}) {
-  await appendRun({
-    category: '$next',
-    action: 'chainStep2',
-    status: 'ok',
-    message: `step 2 (fromStep=${payload.fromStep})`,
-  });
-  return { ok: true, step: 2 };
+  return { ok: true, invokedAt, receivedPayload: payload };
 }
 
 async function executeScheduledCapabilityJob({ payload = {} } = {}) {
@@ -1273,6 +1309,12 @@ async function clearCapabilityLabData() {
         /* ignore */
       }
     }
+    try {
+      await $db.list.set({ key: NEXT_INVOCATIONS_LIST_KEY, value: [] });
+      cleared.push(NEXT_INVOCATIONS_LIST_KEY);
+    } catch {
+      /* ignore */
+    }
   } catch {
     /* ignore */
   }
@@ -1292,8 +1334,7 @@ module.exports = {
   runSdkLabAction,
   clearCapabilityLabLogs,
   clearCapabilityLabData,
-  chainCapabilityStepOne,
-  chainCapabilityStepTwo,
+  nextLabLogInvocation,
   executeScheduledCapabilityJob,
   onScheduledEvent,
 };

@@ -1,5 +1,5 @@
 export async function invokeBackend(apiFunctionName, payload = {}) {
-  const invoke = window.appnestClientFunctions?.appBackend?.invoke;
+  const invoke = window.AppnestFunctions?.$appBackend?.invoke;
   if (typeof invoke !== 'function') {
     throw new Error(
       'appBackend.invoke is not available. Open this app inside Appnest (e.g. app start).',

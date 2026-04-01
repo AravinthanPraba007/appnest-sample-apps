@@ -33,9 +33,11 @@ export function CapabilityLabApp() {
 
   const [filePath, setFilePath] = useState('capability-lab/demo.txt');
   const [listPath, setListPath] = useState('capability-lab/');
-  const [nextFn, setNextFn] = useState('chainCapabilityStepTwo');
+  const [nextFn, setNextFn] = useState('nextLabLogInvocation');
   const [nextDelay, setNextDelay] = useState('0');
-  const [nextPayloadJson, setNextPayloadJson] = useState('{"fromStep":0}');
+  const [nextPayloadJson, setNextPayloadJson] = useState(
+    () => JSON.stringify({ source: 'lab', note: 'hello $next' }, null, 2),
+  );
   const [mapJson, setMapJson] = useState(
     () =>
       JSON.stringify(

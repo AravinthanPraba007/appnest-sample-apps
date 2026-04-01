@@ -2,7 +2,8 @@ export const SDK_NAV = [
   {
     id: '$file',
     title: '$file',
-    blurb: 'getUploadUrl, getDownloadUrl, exists, list, delete, upload demo',
+    blurb:
+      'getUploadUrl, getDownloadUrl, download via $app.fileDownload, exists, list, delete, upload via $app.fileUpload',
   },
   {
     id: '$db',
@@ -24,7 +25,8 @@ export const SDK_NAV = [
   {
     id: '$next',
     title: '$next',
-    blurb: 'run(functionName, payload, delay), chain demo',
+    blurb:
+      'run(functionName, payload, delay), nextLabLogInvocation + trigger history',
   },
   {
     id: 'getTraceId',

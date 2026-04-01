@@ -3,8 +3,7 @@ const {
   runSdkLabAction,
   clearCapabilityLabLogs,
   clearCapabilityLabData,
-  chainCapabilityStepOne,
-  chainCapabilityStepTwo,
+  nextLabLogInvocation,
   executeScheduledCapabilityJob,
   onScheduledEvent,
 } = require('./controller/capabilityLab');
@@ -14,8 +13,7 @@ module.exports = {
   runSdkLabAction,
   clearCapabilityLabLogs,
   clearCapabilityLabData,
-  chainCapabilityStepOne,
-  chainCapabilityStepTwo,
+  nextLabLogInvocation,
   executeScheduledCapabilityJob,
   onScheduledEvent,
 };
